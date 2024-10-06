@@ -6,6 +6,7 @@ body {
     background: url('../images/background.gif') no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
+    direction: ltr; /* Default direction */
 }
 
 #main-content {
@@ -24,6 +25,11 @@ body {
 #language-select {
     padding: 5px;
     font-size: 16px;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 /* Header Styles */
@@ -57,6 +63,14 @@ header {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    background-color: #1e90ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+}
+
+.contract-address button:hover {
+    background-color: #63b8ff;
 }
 
 .social-icons {
@@ -97,6 +111,7 @@ blockquote {
     text-align: center;
     margin: 40px auto;
     max-width: 800px;
+    color: #ffdd57;
 }
 
 /* FAQ Styles */
@@ -148,6 +163,7 @@ footer {
 /* Quantum Computer Mode Styles */
 body.quantum-mode {
     background-color: #000000;
+    direction: ltr; /* Reset direction */
 }
 
 body.quantum-mode #main-content {
@@ -162,4 +178,22 @@ body.quantum-mode #language-select {
     background-color: #000000;
     color: #040488;
     border: 1px solid #040488;
+}
+
+/* RTL Styles */
+[dir="rtl"] .language-selector {
+    right: auto;
+    left: 10px;
+}
+
+[dir="rtl"] header {
+    text-align: center;
+}
+
+[dir="rtl"] .contract-address {
+    text-align: right;
+}
+
+[dir="rtl"] .social-icons a {
+    margin: 0 10px;
 }
