@@ -7,6 +7,9 @@ const rtlLanguages = ['ar', 'he'];
 const languageSelect = document.getElementById('language-select');
 let currentLanguage = 'en'; // Default language
 
+let binaryCssLoaded = false;
+let binaryJsLoaded = false;
+
 function loadLanguage(lang) {
     fetch(`assets/languages/${lang}.json`)
         .then(response => response.json())
@@ -39,20 +42,45 @@ languageSelect.addEventListener('change', function() {
     if (selectedLanguage === 'qc') {
         document.body.classList.add('quantum-mode');
         // Dynamically load binary.css if not already loaded
-        if (!document.querySelector('link[href="assets/css/binary.css"]')) {
+        if (!binaryCssLoaded) {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
             link.href = 'assets/css/binary.css';
+            link.id = 'binary-css';
             document.head.appendChild(link);
+            binaryCssLoaded = true;
         }
         // Dynamically load binary.js if not already loaded
-        if (!document.querySelector('script[src="assets/js/binary.js"]')) {
+        if (!binaryJsLoaded) {
             const script = document.createElement('script');
             script.src = 'assets/js/binary.js';
+            script.id = 'binary-js';
             document.body.appendChild(script);
+            binaryJsLoaded = true;
         }
     } else {
         document.body.classList.remove('quantum-mode');
+        // Remove binary.css
+        if (binaryCssLoaded) {
+            const link = document.getElementById('binary-css');
+            if (link) {
+                link.remove();
+                binaryCssLoaded = false;
+            }
+        }
+        // Remove binary.js
+        if (binaryJsLoaded) {
+            const script = document.getElementById('binary-js');
+            if (script) {
+                script.remove();
+                binaryJsLoaded = false;
+            }
+            // Stop the binary effect if it's running
+            if (typeof window.stopBinaryEffect === 'function') {
+                window.stopBinaryEffect();
+            }
+        }
+        // Load the selected language
         loadLanguage(selectedLanguage);
     }
 });
