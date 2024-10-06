@@ -2,11 +2,19 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+　　 font-family: 'Arial', 'Noto Sans', sans-serif;
     background: url('../images/background.gif') no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
     direction: ltr; /* Default direction */
+}
+/* フォントの適用 */
+[dir="rtl"] body {
+    font-family: 'Noto Sans Arabic', sans-serif;
+}
+
+[lang="he"] body {
+    font-family: 'Noto Sans Hebrew', sans-serif;
 }
 
 #main-content {
