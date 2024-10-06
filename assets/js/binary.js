@@ -1,5 +1,7 @@
 // assets/js/binary.js
 
+let binaryInterval; // Interval IDを保持する変数
+
 // Binary Mode Matrix Effect
 const canvas = document.createElement('canvas');
 canvas.id = 'binary-canvas';
@@ -48,4 +50,13 @@ function draw() {
     }
 }
 
-setInterval(draw, 33);
+binaryInterval = setInterval(draw, 33);
+
+// Function to stop the binary effect
+function stopBinaryEffect() {
+    clearInterval(binaryInterval);
+    canvas.remove();
+}
+
+// Expose the stop function globally
+window.stopBinaryEffect = stopBinaryEffect;
