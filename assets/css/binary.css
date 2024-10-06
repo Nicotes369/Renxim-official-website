@@ -1,0 +1,29 @@
+/* Binary Mode Styles */
+body {
+    background-color: #000000;
+    overflow: hidden;
+}
+
+#binary-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.language-selector {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+}
+
+#language-select {
+    background-color: #000000;
+    color: #040488;
+    border: 1px solid #040488;
+}
+
+.language-selector select {
+    color: #040488;
+    background-color: #000000;
+}
