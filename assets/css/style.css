@@ -1,0 +1,165 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: url('../images/background.gif') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+}
+
+#main-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Language Selector */
+.language-selector {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+}
+
+#language-select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.header-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.header-content p {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.contract-address {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.contract-address button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.social-icons {
+    margin-top: 20px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+}
+
+.social-icons img {
+    width: 40px;
+    height: 40px;
+}
+
+/* Section Styles */
+section {
+    padding: 60px 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+section h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+section p, section ul {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+}
+
+blockquote {
+    font-size: 24px;
+    font-style: italic;
+    text-align: center;
+    margin: 40px auto;
+    max-width: 800px;
+}
+
+/* FAQ Styles */
+.faq-item {
+    margin-bottom: 40px;
+}
+
+.faq-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.buy-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #1e90ff;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.buy-button:hover {
+    background-color: #63b8ff;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.footer-content p {
+    margin: 10px 0;
+}
+
+.disclaimer {
+    font-size: 14px;
+    color: #888888;
+}
+
+.final-message {
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+/* Quantum Computer Mode Styles */
+body.quantum-mode {
+    background-color: #000000;
+}
+
+body.quantum-mode #main-content {
+    display: none;
+}
+
+body.quantum-mode .language-selector {
+    color: #040488;
+}
+
+body.quantum-mode #language-select {
+    background-color: #000000;
+    color: #040488;
+    border: 1px solid #040488;
+}
