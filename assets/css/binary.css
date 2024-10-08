@@ -1,66 +1,72 @@
-/* Quantum Computer Mode Styles - Enhanced */
-body.quantum-mode {
+// assets/js/binary.js
+let binaryInterval; // Interval IDを保持する変数
+// Binary Mode Matrix Effect
+const canvas = document.createElement('canvas');
+canvas.id = 'binary-canvas';
+document.body.appendChild(canvas);
+const ctx = canvas.getContext('2d');
+// Resize Canvas
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+/* Binary Mode Styles */
+body {
     background-color: #000000;
-    color: #ffffff;
-    direction: ltr;
+    overflow: hidden;
 }
 
-body.quantum-mode #main-content {
-    display: none;
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+// Characters - quantum bits representation
+const letters = ['|0⟩', '|1⟩'];
+const fontSize = 20;
+const columns = Math.floor(canvas.width / fontSize);
+const drops = [];
+// Initialize drops
+for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
+#binary-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
-body.quantum-mode .language-selector {
-    color: #040488;
+// Draw function
+function draw() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#040488'; // Text color
+    ctx.font = `${fontSize}px monospace`;
+    for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        // Reset drop to top after it reaches the bottom
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+        drops[i]++;
+    }
+.language-selector {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
 }
 
-body.quantum-mode #language-select {
+binaryInterval = setInterval(draw, 33);
+// Function to stop the binary effect
+function stopBinaryEffect() {
+    clearInterval(binaryInterval);
+    canvas.remove();
+#language-select {
     background-color: #000000;
     color: #040488;
     border: 1px solid #040488;
 }
 
-/* Binary Flow - Matrix Style Integration */
-body.quantum-mode::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(4, 4, 136, 0.5) 0%,
-        rgba(4, 4, 136, 0.5) 2px,
-        transparent 2px,
-        transparent 8px
-    );
-    animation: binary-flow 5s linear infinite;
-    z-index: 0;
-}
-
-@keyframes binary-flow {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: 0 100%;
-    }
-}
-
-/* Binary Text Overlay */
-.binary-text {
-    position: absolute;
-    color: #ffffff;
-    font-size: 16px;
-    z-index: 3;
-    animation: text-fade 10s infinite;
-}
-
-@keyframes text-fade {
-    0%, 100% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
+// Expose the stop function globally
+window.stopBinaryEffect = stopBinaryEffect;
+.language-selector select {
+    color: #040488;
+    background-color: #000000;
 }
