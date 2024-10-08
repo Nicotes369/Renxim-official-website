@@ -1,3 +1,5 @@
+/* assets/css/style.css */
+
 /* General Styles */
 body {
     margin: 0;
@@ -6,7 +8,7 @@ body {
     background: url('../images/background.gif') no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
-    direction: ltr;
+    direction: ltr; /* Default direction */
 }
 
 #main-content {
@@ -62,17 +64,12 @@ header {
     text-align: center;
 }
 
-/* Contract Address Styles - Improved */
 .contract-address {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
     margin-bottom: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 15px;
-    border-radius: 8px;
-    color: #ffffff;
 }
 
 .contract-address span {
@@ -94,14 +91,8 @@ header {
     background-color: #63b8ff;
 }
 
-/* Social Icons */
-.social-icons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
 .social-icons a {
+.social-icons {
     color: #ffffff;
     margin: 0 10px;
     text-decoration: none;
@@ -200,6 +191,26 @@ footer {
     margin-top: 20px;
 }
 
+/* Quantum Computer Mode Styles */
+body.quantum-mode {
+    background-color: #000000;
+    direction: ltr; /* Reset direction */
+}
+
+body.quantum-mode #main-content {
+    display: none;
+}
+
+body.quantum-mode .language-selector {
+    color: #040488;
+}
+
+body.quantum-mode #language-select {
+    background-color: #000000;
+    color: #040488;
+    border: 1px solid #040488;
+}
+
 /* RTL Styles */
 [dir="rtl"] .language-selector {
     right: auto;
@@ -228,15 +239,15 @@ footer {
     .header-content h1 {
         font-size: 32px;
     }
-    
+
     .header-content p {
         font-size: 18px;
     }
-    
+
     .social-icons a img {
         width: 30px;
         height: 30px;
     }
-    
-    /* Responsive Adjustments */
+
+    /* その他の調整 */
 }
