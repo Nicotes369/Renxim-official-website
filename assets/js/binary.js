@@ -1,5 +1,4 @@
 // assets/js/binary.js
-
 document.addEventListener('DOMContentLoaded', () => {
     if (document.body.classList.contains('quantum-mode')) {
         startQuantumRain();
