@@ -41,51 +41,113 @@ languageSelect.addEventListener('change', function() {
     const selectedLanguage = this.value;
     if (selectedLanguage === 'qc') {
         document.body.classList.add('quantum-mode');
-        // Dynamically load binary.css if not already loaded
-        if (!binaryCssLoaded) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'assets/css/binary.css';
-            link.id = 'binary-css';
-            document.head.appendChild(link);
-            binaryCssLoaded = true;
-        }
-        // Dynamically load binary.js if not already loaded
-        if (!binaryJsLoaded) {
-            const script = document.createElement('script');
-            script.src = 'assets/js/binary.js';
-            script.id = 'binary-js';
-            document.body.appendChild(script);
-            binaryJsLoaded = true;
-        }
+        // Hide main content
+        document.getElementById('main-content').style.display = 'none';
+        // Start Quantum Binary Rain
+        startQuantumRain();
     } else {
         document.body.classList.remove('quantum-mode');
-        // Remove binary.css
-        if (binaryCssLoaded) {
-            const link = document.getElementById('binary-css');
-            if (link) {
-                link.remove();
-                binaryCssLoaded = false;
-            }
-        }
-        // Remove binary.js
-        if (binaryJsLoaded) {
-            const script = document.getElementById('binary-js');
-            if (script) {
-                script.remove();
-                binaryJsLoaded = false;
-            }
-            // Stop the binary effect if it's running
-            if (typeof window.stopBinaryEffect === 'function') {
-                window.stopBinaryEffect();
-            }
-        }
+        // Show main content
+        document.getElementById('main-content').style.display = 'block';
+        // Stop Quantum Binary Rain
+        stopQuantumRain();
         // Load the selected language
         loadLanguage(selectedLanguage);
     }
+    showLanguageChangeNotification(selectedLanguage);
 });
 
 // Initial language load
 document.addEventListener('DOMContentLoaded', () => {
     loadLanguage(currentLanguage);
 });
+
+// Show Language Change Notification
+function showLanguageChangeNotification(lang) {
+    const notification = document.createElement('div');
+    if (lang === 'qc') {
+        notification.innerText = `Quantum Computer Mode Activated`;
+        notification.style.color = '#00ccff';
+    } else {
+        notification.innerText = `Language changed to ${getLanguageName(lang)}`;
+    }
+    notification.style.position = 'fixed';
+    notification.style.bottom = '20px';
+    notification.style.right = '20px';
+    notification.style.padding = '10px 20px';
+    notification.style.backgroundColor = 'rgba(4, 4, 136, 0.8)';
+    notification.style.color = '#ffffff';
+    notification.style.borderRadius = '5px';
+    notification.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.5)';
+    notification.style.zIndex = '1000';
+    notification.style.fontFamily = 'Orbitron, sans-serif';
+    notification.style.fontSize = '16px';
+    document.body.appendChild(notification);
+
+    // Fade out after 3 seconds
+    setTimeout(() => {
+        notification.style.transition = 'opacity 1s ease';
+        notification.style.opacity = '0';
+        setTimeout(() => {
+            notification.remove();
+        }, 1000);
+    }, 3000);
+}
+
+// Helper function to get language name
+function getLanguageName(lang) {
+    const languages = {
+        'en': 'English',
+        'ja': '日本語',
+        'zh': '中文',
+        'hi': 'Hindi',
+        'fa': 'Persian',
+        'ar': 'Arabic',
+        'he': 'Hebrew',
+        'ru': 'Russian',
+        'de': 'German',
+        'it': 'Italian',
+        'es': 'Spanish',
+        'ko': 'Korean',
+        'qc': 'Quantum Computer'
+    };
+    return languages[lang] || lang;
+}
+
+// Function to copy contract address with enhanced feedback
+function copyAddress() {
+    const address = document.getElementById('contract-address').innerText.split(': ')[1];
+    navigator.clipboard.writeText(address).then(() => {
+        showCopySuccess();
+    }).catch(err => {
+        showCopyFailure();
+        console.error('Error copying text: ', err);
+    });
+}
+
+// Function to show copy success feedback
+function showCopySuccess() {
+    const copySpan = document.getElementById('contract-address');
+    const originalColor = copySpan.style.color;
+    copySpan.style.color = '#00ccff';
+    copySpan.style.textShadow = '0 0 10px #00ccff, 0 0 20px #00ccff, 0 0 30px #00ccff';
+    copySpan.innerText = 'コピーが完了しました';
+
+    setTimeout(() => {
+        copySpan.style.color = originalColor;
+        copySpan.style.textShadow = '';
+        copySpan.innerText = '0xfE7Aa1F52633b0812bCAAa3fab4A4e2D3182Dbc4';
+    }, 3000);
+}
+
+// Function to show copy failure feedback
+function showCopyFailure() {
+    const copySpan = document.getElementById('contract-address');
+    copySpan.style.color = '#ff0000';
+    copySpan.innerText = 'コピーに失敗しました';
+
+    setTimeout(() => {
+        copySpan.style.color = '#ffffff';
+        copySpan.innerText = '0xfE7Aa1F52633b0812bCAAa3fab4A4e2D3182Dbc4';
+    }, 3000);
+}
