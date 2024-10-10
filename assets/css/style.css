@@ -1,5 +1,4 @@
 /* assets/css/style.css */
-
 /* General Styles */
 body {
     margin: 0;
@@ -9,6 +8,7 @@ body {
     background-size: cover;
     color: #ffffff;
     direction: ltr; /* Default direction */
+    direction: ltr;
 }
 
 #main-content {
@@ -56,18 +56,12 @@ header {
     font-size: 48px;
     margin-bottom: 20px;
     text-align: center;
-    /* Neon Glow Effect */
-    color: #00ccff;
-    text-shadow: 0 0 5px #00ccff, 0 0 10px #00ccff, 0 0 15px #0099cc;
 }
 
 .header-content p {
     font-size: 24px;
     margin-bottom: 30px;
     text-align: center;
-    /* Neon Glow Effect */
-    color: #ffffff;
-    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #cccccc;
 }
 
 /* Contract Address Styles - Improved */
@@ -108,7 +102,6 @@ header {
     justify-content: center;
     margin-top: 20px;
 }
-
 .social-icons a {
     color: #ffffff;
     margin: 0 10px;
@@ -211,24 +204,19 @@ footer {
 /* Quantum Computer Mode Styles */
 body.quantum-mode {
     background-color: #000000;
-    overflow: hidden;
     direction: ltr; /* Reset direction */
 }
-
 body.quantum-mode #main-content {
-    display: none; /* Hide main content */
+    display: none;
 }
-
 body.quantum-mode .language-selector {
-    color: #00ccff;
+    color: #040488;
 }
-
 body.quantum-mode #language-select {
     background-color: #000000;
-    color: #00ccff;
-    border: 1px solid #00ccff;
+    color: #040488;
+    border: 1px solid #040488;
 }
-
 /* RTL Styles */
 [dir="rtl"] .language-selector {
     right: auto;
@@ -253,7 +241,6 @@ body.quantum-mode #language-select {
     margin-left: 0;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
     .header-content h1 {
         font-size: 32px;
@@ -268,5 +255,6 @@ body.quantum-mode #language-select {
         height: 30px;
     }
 
-    /* Additional responsive adjustments if needed */
+    /* その他の調整 */
+    /* Responsive Adjustments */
 }
