@@ -1,68 +1,62 @@
 // assets/js/binary.js
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.body.classList.contains('quantum-mode')) {
-        startQuantumRain();
-    }
-});
+let binaryInterval; // Interval IDを保持する変数
 
-// Function to start Quantum Binary Rain
-function startQuantumRain() {
-    const binaryContainer = document.getElementById('binary-container');
-    if (!binaryContainer) return;
+// Binary Mode Matrix Effect
+const canvas = document.createElement('canvas');
+canvas.id = 'binary-canvas';
+document.body.appendChild(canvas);
 
-    const columns = Math.floor(window.innerWidth / 20); // Adjust based on column width
-    for (let i = 0; i < columns; i++) {
-        createBinaryColumn(i * 20);
-    }
+const ctx = canvas.getContext('2d');
 
-    // Adjust on window resize
-    window.addEventListener('resize', () => {
-        const newColumns = Math.floor(window.innerWidth / 20);
-        if (newColumns > columns) {
-            for (let i = columns; i < newColumns; i++) {
-                createBinaryColumn(i * 20);
-            }
-        } else if (newColumns < columns) {
-            for (let i = newColumns; i < columns; i++) {
-                const column = document.getElementById(`binary-column-${i}`);
-                if (column) binaryContainer.removeChild(column);
-            }
+// Resize Canvas
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Characters - quantum bits representation
+const letters = ['|0⟩', '|1⟩'];
+const fontSize = 20;
+const columns = Math.floor(canvas.width / fontSize);
+const drops = [];
+
+// Initialize drops
+for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
+}
+
+// Draw function
+function draw() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#040488'; // Text color
+    ctx.font = `${fontSize}px monospace`;
+
+    for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        // Reset drop to top after it reaches the bottom
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
         }
-    });
-}
 
-// Function to create a binary column
-function createBinaryColumn(leftPosition) {
-    const binaryContainer = document.getElementById('binary-container');
-    const column = document.createElement('div');
-    column.classList.add('binary-column');
-    column.id = `binary-column-${leftPosition}`;
-    column.style.left = `${leftPosition}px`;
-
-    // Randomize animation duration and delay
-    const duration = Math.random() * 5 + 5; // 5s to 10s
-    const delay = Math.random() * -20; // Negative delay for continuous effect
-    column.style.animationDuration = `${duration}s`;
-    column.style.animationDelay = `${delay}s`;
-
-    // Create multiple quantum bits in the column
-    const numberOfBits = Math.floor(Math.random() * 20) + 10; // 10 to 30 bits
-    for (let i = 0; i < numberOfBits; i++) {
-        const bit = document.createElement('span');
-        bit.textContent = Math.random() < 0.5 ? '|0⟩' : '|1⟩';
-        // Randomize font size for depth effect
-        const fontSize = Math.random() * 10 + 10; // 10px to 20px
-        bit.style.fontSize = `${fontSize}px`;
-        column.appendChild(bit);
+        drops[i]++;
     }
-
-    binaryContainer.appendChild(column);
 }
 
-// Function to stop Quantum Binary Rain
-function stopQuantumRain() {
-    const binaryContainer = document.getElementById('binary-container');
-    if (!binaryContainer) return;
-    binaryContainer.innerHTML = '';
+binaryInterval = setInterval(draw, 33);
+
+// Function to stop the binary effect
+function stopBinaryEffect() {
+    clearInterval(binaryInterval);
+    canvas.remove();
 }
+
+// Expose the stop function globally
+window.stopBinaryEffect = stopBinaryEffect;
