@@ -1,5 +1,4 @@
 // assets/js/binary.js
-
 let binaryInterval; // Interval IDを保持する変数
 
 // Binary Mode Matrix Effect
